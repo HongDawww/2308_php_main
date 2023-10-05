@@ -82,11 +82,11 @@ function db_select_boards_paging(&$conn,&$arr_param){
 //---------------------------------db 레코드 작성-----------------------------------
 function db_insert_boards(&$conn, &$arr_param){
 	$currentDate = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO miniboard (id, b_pw, b_title, b_content, b_date) VALUES (:b_id, :b_pw, :b_title, :b_content, NOW())";
+    $sql = "INSERT INTO miniboard (b_id, b_pw, b_title, b_content, b_date) VALUES (:b_id, :b_pw, :b_title, :b_content, NOW())";
 
 
 	$arr_ps = [
-		":id" => $arr_param["b_id"]
+		":b_id" => $arr_param["b_id"]
 		,":b_pw" => $arr_param["b_pw"]
         ,":b_title" => $arr_param["b_title"]
         ,":b_content" => $arr_param["b_content"]
@@ -117,7 +117,8 @@ function db_select_boards_id(&$conn,&$arr_param){
 	." ,b_title "
 	." ,b_content "
 	." ,b_id "
-	." ,b_date"
+	." ,b_date "
+	." ,b_hit "
 	." FROM "
 	." miniboard "
 	." WHERE "
@@ -163,4 +164,32 @@ function db_update_boards_id(&$conn, &$arr_param) {
         return false;
     }
 }
+//----------------------------------------------------------------------------------
+
+//---------------------------------삭제 -------------------------------------------
+function db_delete_boards_id(&$conn,&$arr_param){
+	$sql = 
+	" UPDATE miniboard "
+	." SET "
+	." delete_at = now() "
+	." ,delete_flg = '1' "
+	." WHERE "
+	." id = :id "
+	;
+
+	$arr_ps = [
+		":id" => $arr_param["id"]
+	];
+
+	try {
+		$stmt = $conn->prepare($sql);
+		$result = $stmt->execute($arr_ps);
+		return $result;
+	} catch(Exception $e) {
+		echo $e->getMessage();
+		return false;
+	}
+}
+
+//----------------------------------------------------------------------------------
 ?>

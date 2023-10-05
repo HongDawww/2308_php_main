@@ -34,8 +34,8 @@ if($http_method === "POST") {
 			$conn->beginTransaction();
 
 			$arr_param = [
-				"id" => $_POST["id"]
-				,"b_id" => $_POST["b_id"]
+				// "id" => $_POST["id"]
+				"b_id" => $_POST["b_id"]
 				,"b_pw" => $_POST["b_pw"]
 				,"b_title" => $_POST["b_title"]
 				,"b_content" => $_POST["b_content"]

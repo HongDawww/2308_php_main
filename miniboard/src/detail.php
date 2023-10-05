@@ -3,7 +3,7 @@ define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/miniboard/src/");
 define("ERROR_MSG_PARAM","Parameter Error :%s");
 require_once(ROOT."db.php"); //함수가 정의된 파일 불러오기
 
-$no = "";
+$id = "";
 $conn = null;
 $arr_err_msg = [];
 
@@ -13,13 +13,8 @@ try {
 	}
 	$id = isset($_GET["id"]) ? $_GET["id"] : "";
 	$page = isset($_GET["page"]) ? $_GET["page"] : "";
+	$b_hit = isset($_GET['b_hit']) ? $_GET['b_hit'] : 0;
 
-	// if (empty($id)) {
-	// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
-	// }
-	// if (empty($page)) {
-	// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "page");
-	// }
 	if($id === ""){
 		$arr_err_msg[]= sprintf(ERROR_MSG_PARAM,"id");
 	}
@@ -41,6 +36,21 @@ try {
 		throw new Exception("DB Error : PDO Select_id count");
 	}
 	$item = $result[0];
+
+	 // 쿠키를 읽어옴
+	 $cookie_name = "b_hit_".$id;
+	 if(!isset($_COOKIE[$cookie_name])) {
+		 // 쿠키가 없으면 조회수 1 증가시키고 쿠키 설정
+		 $sql = "UPDATE miniboard SET b_hit = b_hit + 1 WHERE id = :id";
+		 $stmt = $conn->prepare($sql);
+		 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		 $stmt->execute();
+ 
+		 // 쿠키 설정 (유효기간 24시간)
+		 setcookie($cookie_name, "visited", time() + (60 * 60 * 24));
+	 }
+ 
+	 echo "b_hit: " . $b_hit;
 	
 } catch (Exception $e) {
 	echo $e->getMessage();
@@ -78,6 +88,10 @@ try {
 			<tr>
 				<th>작성일자</th>
 				<td><?php echo $item["b_date"];?></td>
+			</tr>
+			<tr>
+				<th>조회수</th>
+				<td><?php echo $item["b_hit"]; ?></td>
 			</tr>
 		</table>
 		<section>
