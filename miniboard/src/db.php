@@ -82,11 +82,11 @@ function db_select_boards_paging(&$conn,&$arr_param){
 //---------------------------------db 레코드 작성-----------------------------------
 function db_insert_boards(&$conn, &$arr_param){
 	$currentDate = date("Y-m-d H:i:s");
-    $sql = "INSERT INTO miniboard (b_id, b_pw, b_title, b_content, b_date) VALUES (:b_id, :b_pw, :b_title, :b_content, NOW())";
+    $sql = "INSERT INTO miniboard (id, b_pw, b_title, b_content, b_date) VALUES (:b_id, :b_pw, :b_title, :b_content, NOW())";
 
 
 	$arr_ps = [
-		":b_id" => $arr_param["b_id"]
+		":id" => $arr_param["b_id"]
 		,":b_pw" => $arr_param["b_pw"]
         ,":b_title" => $arr_param["b_title"]
         ,":b_content" => $arr_param["b_content"]
