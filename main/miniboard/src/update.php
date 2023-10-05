@@ -1,7 +1,7 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"] . "/miniboard/src/");
 define("ERROR_MSG_PARAM", "파라미터 오류: %s");
-require_once(ROOT . "db.php");
+require_once(ROOT."db.php");
 
 $conn = null;
 $http_method = $_SERVER["REQUEST_METHOD"];
@@ -25,11 +25,61 @@ try {
         if ($page === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "page");
         }
-
+      
         if (count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
          }
 
+    } else {
+        $id = isset($_POST["id"]) ? $_POST["id"] : "";
+        $page = isset($_POST["page"]) ? $_POST["page"] : "";
+        $title = isset($_POST["b_title"]) ? $_POST["b_title"] : "";
+        $content = isset($_POST["b_content"]) ? $_POST["b_content"] : "";
+        $bid = isset($_POST["b_id"]) ? $_POST["b_id"] : "";
+
+            
+        if($id === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
+        }
+        if($page === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "page");
+        }
+        if (count($arr_err_msg) >= 1) {
+            throw new Exception(implode("<br>", $arr_err_msg));
+        }
+        if($title === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "b_title");
+        }
+        if($content === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "b_content");
+        }
+        if($content === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "b_id");
+        }
+        
+        if(count($arr_err_msg) === 0) {
+            
+
+            $arr_param = [
+                "id" => $id
+                ,"b_title" => $_POST["b_title"]
+                ,"b_content" => $_POST["b_content"]
+                ,"b_id" => $_POST["b_id"]
+            ]; 
+    
+            $conn->beginTransaction();
+
+            if (!db_update_boards_id($conn, $arr_param)) {
+                throw new Exception("DB 오류: Update_boards_id");
+            }
+            $conn->commit();
+    
+            header("Location: detail.php?id={$id}&page={$page}");
+            exit;
+            
+        }
+    }
+        
         $arr_param = [
             "id" => $id,
            
@@ -45,53 +95,7 @@ try {
             throw new Exception("DB Error : PDO Select_id Count,".count($result));
         }
         $item = $result[0];
-    } else {
-        $id = isset($_POST["id"]) ? $_POST["id"] : "";
-        $page = isset($_POST["page"]) ? $_POST["page"] : "";
-        // $title = isset($_POST["b_title"]) ? $_POST["b_title"] : "";
-        // $content = isset($_POST["b_content"]) ? $_POST["b_content"] : "";
-        // $bid = isset($_POST["b_id"]) ? $_POST["b_id"] : "";
-
-
-        $arr_param = [
-			"id" => $id
-			,"b_title" => $_POST["title"]
-			,"b_content" => $_POST["content"]
-		]; 
-
-        
-        if($id === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
-        }
-        if($page === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "page");
-        }
-        if($title === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "b_title");
-        }
-        if($content === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "b_content");
-        }
-        if($content === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "b_id");
-        }
-        
-        if(count($arr_err_msg) >= 1) {
-            throw new Exception(implode("<br>", $arr_err_msg));
-        }
-        
-        $conn->beginTransaction();
-
-        if (!db_update_boards_id($conn, $arr_param)) {
-            throw new Exception("DB 오류: Update_boards_id");
-        }
-        $conn->commit();
-
-        header("Location: detail.php?id={$id}&page={$page}");
-        exit;
-        
        
-}
 } catch (Exception $e) {
     if ($http_method === "POST") {
         $conn->rollBack(); // 에러 발생 시 롤백
