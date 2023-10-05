@@ -21,7 +21,7 @@ $err_msg = isset($_GET["err_msg"]) ? $_GET["err_msg"] : "";
 	?>
 	<br>
 	<main class= "container">
-		<p>에러입니다</p>
+		<p>죄송합니다 에러입니다</p>
 		<p>관리자에게 문의하세요</p>
 		<p><?php echo $err_msg ?></p>
 		<p> Code : E01</p>

@@ -58,7 +58,8 @@
 		} //강제 예외발생 : select boards
 
 	} catch (Exception $e) {
-		echo $e->getMessage(); //예외발생 메세지 출력
+		// echo $e->getMessage(); //예외발생 메세지 출력
+		header("Location: error.php/?err_msg={$e->getMessage()};");
 		exit; //종료
 	} finally {
 		db_destroy_conn($conn); //db 파기

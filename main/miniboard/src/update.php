@@ -12,7 +12,6 @@ try {
         throw new Exception("DB 오류: PDO 인스턴스");
     }
 
-
     if($http_method === "GET"){
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         $page = isset($_GET["page"]) ? $_GET["page"] : "";
@@ -26,7 +25,6 @@ try {
         if ($page === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "page");
         }
-    
 
         if (count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
@@ -34,6 +32,7 @@ try {
 
         $arr_param = [
             "id" => $id,
+           
         ];
 
         $result = db_select_boards_id($conn, $arr_param);
@@ -49,10 +48,18 @@ try {
     } else {
         $id = isset($_POST["id"]) ? $_POST["id"] : "";
         $page = isset($_POST["page"]) ? $_POST["page"] : "";
-        $title = isset($_POST["b_title"]) ? $_POST["b_title"] : "";
-        $content = isset($_POST["b_content"]) ? $_POST["b_content"] : "";
-        $bid = isset($_POST["b_id"]) ? $_POST["b_id"] : "";
-    }
+        // $title = isset($_POST["b_title"]) ? $_POST["b_title"] : "";
+        // $content = isset($_POST["b_content"]) ? $_POST["b_content"] : "";
+        // $bid = isset($_POST["b_id"]) ? $_POST["b_id"] : "";
+
+
+        $arr_param = [
+			"id" => $id
+			,"b_title" => $_POST["title"]
+			,"b_content" => $_POST["content"]
+		]; 
+
+        
         if($id === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
         }
@@ -71,17 +78,19 @@ try {
         
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
-
+        }
+        
         $conn->beginTransaction();
 
-    if (!db_update_boards_id($conn, $arr_param)) {
-        throw new Exception("DB 오류: Update_boards_id");
-    }
+        if (!db_update_boards_id($conn, $arr_param)) {
+            throw new Exception("DB 오류: Update_boards_id");
+        }
+        $conn->commit();
 
-    $conn->commit();
-
-    header("Location: detail.php?id={$id}&page={$page}");
-    exit;
+        header("Location: detail.php?id={$id}&page={$page}");
+        exit;
+        
+       
 }
 } catch (Exception $e) {
     if ($http_method === "POST") {
@@ -96,7 +105,7 @@ try {
 
 ?>
 
-?>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -107,7 +116,7 @@ try {
 </head>
 <body>
 	<main>
-	<form action="/mini_board/src/update.php" method="post">
+	<form action="/miniboard/src/update.php" method="post">
 			<table>
 			<input type="hidden" name="id" id="id" value="<?php echo $id;?>">
 			<input type="hidden" name="page" id="page" value="<?php echo $page;?>">
@@ -123,7 +132,6 @@ try {
 				<tr>
 					<th>제목</th>
 					<td>
-					
 						<input type="text" name="b_title" id="b_title" value="<?php echo $item["b_title"];?>">
 					</td>
 				</tr>
@@ -134,7 +142,7 @@ try {
 			</table>
 			<section>
 				<button type="submit">완료</button>
-				<a href="/mini_board/src/detail.php?id=<?php echo $item["id"];?>&page=<?php echo $page;?>">수정취소</a>
+				<a href="/miniboard/src/detail.php?id=<?php echo $item["id"];?>&page=<?php echo $page;?>">수정취소</a>
 				
 			</section>
 		</form>
