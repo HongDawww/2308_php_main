@@ -37,20 +37,24 @@ try {
 	}
 	$item = $result[0];
 
-	 // 쿠키를 읽어옴
+	
 	 $cookie_name = "b_hit_".$id;
 	 if(!isset($_COOKIE[$cookie_name])) {
 		 // 쿠키가 없으면 조회수 1 증가시키고 쿠키 설정
-		 $sql = "UPDATE miniboard SET b_hit = b_hit + 1 WHERE id = :id";
+		 $sql = " UPDATE miniboard SET b_hit = b_hit + 1 WHERE id = :id ";
+		 $arr_ps = [
+			":id" => $id
+		 ];
 		 $stmt = $conn->prepare($sql);
-		 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-		 $stmt->execute();
+		//  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		 $stmt->execute($arr_ps);
+		 $result = $stmt->fetchAll();
  
 		 // 쿠키 설정 (유효기간 24시간)
-		 setcookie($cookie_name, "visited", time() + (60 * 60 * 24));
+		 setcookie($cookie_name, "visited", time() + (60 * 60 * 80));
 	 }
  
-	 echo "b_hit: " . $b_hit;
+	
 	
 } catch (Exception $e) {
 	echo $e->getMessage();
