@@ -24,3 +24,4 @@ for($dan = 1; $dan<=19; $dan++) {
 		fputs($file, $dan. " X " . $i. " = " . $res . "\n");
 	}
 }
+fclose($file);
