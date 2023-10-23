@@ -1,0 +1,1 @@
+console.log("JS안녕JS");
