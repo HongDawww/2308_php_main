@@ -38,6 +38,13 @@ let arr = [1,2,3];
 
 // 자기 자신의 회원 정보를 객체로 만들기
 
+// let info = {
+//     name1: ""
+//     ,birth_day: ""
+//     ,gender: ""
+// }
+
+
 let hong = {
     first_name: "다윗"
     ,age: 31
@@ -45,5 +52,8 @@ let hong = {
     ,id: function(){
         console.log("d939305@naver.com");
     }
-   
+    ,birth_day: {
+        birth_day1: "930510"
+        ,birth_day2: "1993"
+    }
 };
