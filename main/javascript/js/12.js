@@ -79,20 +79,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
 // --------------------배열 객체의 sort의 경우 예시
 // sort_arr.sort (function (a,b) {
 //     return a - b
