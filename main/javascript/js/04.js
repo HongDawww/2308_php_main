@@ -1,7 +1,7 @@
 // console.log("JS안녕JS");
 
 // -------------------------- 변수 --------------------------
-// var / let / conset
+// var / let / const
 // var : 중복 선언 가능 , 재할당 가능 , 함수 레벨 스코프
 var u_name = "홍길동";
 console.log(u_name);
