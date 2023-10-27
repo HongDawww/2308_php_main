@@ -1,61 +1,36 @@
-// 1. 버튼 클릭시 '두근 두근 '메세지 출력 <하>
+// 현재 시간 화면에 표시
+// 실시간 시간을 화면에 표시
+//toLocaleTimeString();
+const clock = document.querySelector("h2#clock");
 
-const DKDK = document.getElementById("click_btn");
+function getClock() {
+	const date = new Date();
+	const hours = String(date.getHours()).padStart(2, "0");
+	const minutes = String(date.getMinutes()).padStart(2, "0");
+	const seconds = String(date.getSeconds()).padStart(2, "0");
+    const main = hours >= 12 ? "오후" : " 오전";
+	clock.innerText =(` 현재 시각 ${main} ${hours % 12} : ${minutes} : ${seconds}`);
+}
+getClock();
 
-DKDK.addEventListener('click',() => {
-    alert('두근두근');
+
+const STOPBTN = document.getElementById("stop_btn");
+let interV;
+
+STOPBTN.addEventListener("click",function () {
+    clearInterval(interV);
 });
 
+getClock();
+interV = setInterval(getClock, 1000);
 
-// 2. 특정 영역에 마우스 포인트가 진입하면 아래 내용의 알러트가 나옴 / 들킨 상태에서는 안 나옴
+// 재시작 = 누른 시점의 시간부터 다시 작동
+const RESRT = document.getElementById("restart");
 
-
-// 3-2 . 클릭시 들켰다
-const WIN = document.getElementById("icon");
-
-WIN.addEventListener('click', () => {
-        alert('들켰따');
-        WIN.style.backgroundColor = "blue";  
+RESRT.addEventListener("click",function () {
+    // clearInterval(interV);
+    getClock();
+    interV = setInterval(getClock, 1000);
 });
 
-WIN.addEventListener('mouserenter', () => {
-    WIN.style.backgroundColor = "";
-});
-
-const WIN2 = document.getElementById("bk");
-WIN.addEventListener('click',() => {
-    alert('다시숨는다');
-    WIN.style.backgroundColor ="red";
-    WIN.style.float="right";
-  
-});
-
-// function ClickHide(event) {
-//     const div = document.getElementById("icon");
-
-//     div.style.backgroundColor = "beige";
-//     alert('들켰다');
-
-//     div.addEventListener('click',() => {
-//         div.style.backgroundColor="red";
-//     });
-
-//     // const rect = event.target.getBoundingClientRect();
-//     // const rect = div.getBoundingClientRect();
-//     // const currentX = rect.left;
-//     // const currentY = rect.top;
-
-//     // const newX = window.innerWidth - rect.width; 
-//     // const newY = window.innerHeight - rect.height;
-
-//     // const ranX = Math.random() * newX; 
-//     // const ranY = Math.random() * newY; 
-
-//     // div.style.transform = `translate(${ranX}px, ${ranY}px)`;};
-
-
-
-// 2-1. 클릭하면
-// 3. 2버너 영역 클릭하면 아래의 알러트 출력, 배경색 베이지로 변경
-// 4. 3번에서 한 번 더 클릭 하면 아래의 알러트 출력. 배경색 흰색으로 바뀌고 안보임(다시숨음)
-
+// setInterval(getClock, 1000);
