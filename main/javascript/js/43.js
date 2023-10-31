@@ -39,5 +39,23 @@
 		,name: '홍길동'
 	}
 }
-
+https://picsum.photos/
 */
+
+const MY_URL = "https://picsum.photos/v2/list?page=2&limit=5";
+
+fetch(MY_URL)
+.then( response => response.json())
+.then ( data => makeImg(data) )
+.catch( error => console.log(error));
+
+function makeImg(data) {
+	data.forEach( item => {
+		const NEW_IMG = document.createElement('img');
+		NEW_IMG.setAttribute('src',item.download_url);
+		NEW_IMG.style.width = '200px';
+		NEW_IMG.style.height = '200px';
+		document.body.appendChild(NEW_IMG);
+	});
+}
+
