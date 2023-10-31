@@ -42,20 +42,76 @@
 https://picsum.photos/
 */
 
-const MY_URL = "https://picsum.photos/v2/list?page=2&limit=5";
+// const MY_URL = "https://picsum.photos/v2/list?page=2&limit=5";
+const BTN_API = document.querySelector('#btn-api'); // 버튼 객체 가져옴
+BTN_API.addEventListener('click', my_fetch);
 
-fetch(MY_URL)
-.then( response => response.json())
-.then ( data => makeImg(data) )
-.catch( error => console.log(error));
+
+function my_fetch() {
+	const INPUT_URL = document.querySelector('#input-url');
+
+	fetch(INPUT_URL.value.trim())
+	.then( response => {
+		if( response.status >= 200 && response.status < 300) {
+			return response.json();
+		} else {
+			throw new Error('에러');
+		}
+	})
+	.then ( data => makeImg(data) )
+	.catch( error => console.log(error));
+}
+
 
 function makeImg(data) {
 	data.forEach( item => {
 		const NEW_IMG = document.createElement('img');
+		const DIV_IMG = document.querySelector('#div-img');
+
 		NEW_IMG.setAttribute('src',item.download_url);
 		NEW_IMG.style.width = '200px';
 		NEW_IMG.style.height = '200px';
-		document.body.appendChild(NEW_IMG);
+		DIV_IMG.appendChild(NEW_IMG);
 	});
 }
 
+// 내가 한 방법
+
+const DEL_BTN = document.getElementById("del-btn");
+DEL_BTN.addEventListener('click',apiDelete);
+
+function apiDelete(){
+	const DIV_IMG = document.querySelector('#div-img');
+	const DEL_API = DIV_IMG.querySelectorAll('img');
+	DEL_API.forEach(DEL_API => {
+		DEL_API.remove();
+	});
+}
+
+
+const BTN_CLEAR = document.querySelector('#btn-clear');
+BTN_CLEAR.addEventListener("click",imgClear);
+
+function imgClear() {
+
+	// 방법 1
+	// const DIV_IMG = document.querySelectorAll('img');
+
+	// for(let i = 0; i < DIV_IMG.length; i++) {
+	// 	DIV_IMG[i].remove(); // 해당요소 삭제
+	// }
+
+	// 방법 2 : 재 호출이 안됨
+	// const DIV_IMG = document.querySelector('#div-img');
+	// DIV_IMG.remove();
+
+	// 방법 3 : replacdChildren - 자식만 삭제 
+	// const DIV_IMG = document.querySelector('#div-img');
+	// DIV_IMG.replaceChildren();
+
+	// 방법 4 
+	const DIV_IMG = document.querySelector('#div-img');
+	DIV_IMG.innerHTML = "";
+
+
+}
