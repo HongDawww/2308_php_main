@@ -115,3 +115,24 @@ function imgClear() {
 
 
 }
+
+
+ // fetch 2nd 아규먼트 셋팅
+
+//  function  infinityLoop () {
+// 	let apiUrl = "http://112.222.157.156:6001/03_insert.php"
+// 	let init = {
+// 		method: "POST"
+
+// 		,body: {
+// 			title: "아아"
+// 			,content: "에에"
+// 			,em_id: "2"
+// 		}
+		
+// 	};
+
+// 	fetch(apiUrl,init)
+// 	.then( response => console.log(response) )
+// 	.catch( error => console.log(error));
+//  }
