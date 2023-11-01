@@ -35,14 +35,13 @@
   
   .image-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
 	grid-gap: 10px;
-	max-width: 100%;
+    max-width: 100%;
 	padding: 20px;
   }
   
   .image-div {
-	background-color: yellow;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -53,11 +52,11 @@
   .image {
 	width: 100%;
 	height: auto; 
-	max-width: 200px; 
+	max-width: 250px; 
   }
   
   .image-id {
-	background-color: red;
+	background-color: rgb(117, 117, 117);
 	width: 100%;
 	text-align: center;
 	padding: 5px;
