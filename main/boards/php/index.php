@@ -102,9 +102,16 @@ $result = $db->query($sql);
 </head>
 <body>
 	<article class="boardsArticle"> 
+	
 		<div id="list">
 			<h3> 게시판 </h3>
+			
 			<table>
+			<div class="btnSet">
+				<a href="./write.php" class="btnWrite">
+					글쓰기
+				</a>
+			</div>
 				<caption class=""></caption>
 				<thead>
 					<tr>
@@ -148,9 +155,7 @@ $result = $db->query($sql);
 				</tbody>
 				</table>
 			
-				<div class="btnSet">
-					<a href="./write.php" class="btnWrite">글쓰기</a>
-				</div>
+
 
 				<div class="paging">
 					<?=$paging?>
