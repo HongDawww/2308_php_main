@@ -17,15 +17,15 @@ function my_fetch() {
     .catch(error => console.log(error));
 }
 
-const DEL_BTN = document.getElementById("btn-clear");
-DEL_BTN.addEventListener('click', apiDelete);
+    const DEL_BTN = document.getElementById("btn-clear");
+    DEL_BTN.addEventListener('click', apiDelete);
 
-function apiDelete() {
-    const DIV_IMG = document.querySelector('#div-img');
-    while (DIV_IMG.firstChild) {
-        DIV_IMG.firstChild.remove();
+    function apiDelete() {
+        const DIV_IMG = document.querySelector('#div-img');
+        while (DIV_IMG.firstChild) {
+            DIV_IMG.firstChild.remove();
+        }
     }
-}
 
 function makeImg(data) {
     const DIV_IMG = document.querySelector('#div-img');
@@ -40,7 +40,7 @@ function makeImg(data) {
 
         const NEW_ID = document.createElement('p');
         NEW_ID.className = 'image-id';
-        NEW_ID.innerText = `ID: ${item.id}`;
+        NEW_ID.innerText = ` ${item.id}`;
 
         IMAGE_WRAP.appendChild(NEW_ID); 
         IMAGE_WRAP.appendChild(NEW_IMG); 

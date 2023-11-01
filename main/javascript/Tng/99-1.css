@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 2rem;
+}
+h1 {
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+}
+main {
+    width: 80%;
+    margin: 0 auto;
+}
+.section-input {
+    text-align: center;
+    margin: 3rem auto;
+}
+#input-url {
+    width: 350px;
+    
+}
+.section-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 5px;
+    margin: 50px;
+}
+article {
+    background-color: gray;
+    text-align: center;
+}
+.article-id {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.article-img {
+    width: 95%;
+    margin: 0 auto;
+}
