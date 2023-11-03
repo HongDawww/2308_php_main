@@ -36,7 +36,7 @@ class ParentsController {
 		$url = $_GET["url"];
 		if( !isset($_SESSION["u_id"]) && in_array($url,$this->arrNeedAuth)) {
 			header("Location: /user/login");
-			exit;
+			exit();
 		}
 	}
 
