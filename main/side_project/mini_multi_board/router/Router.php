@@ -28,7 +28,6 @@ class Router {
 			} else {
 				// 해당 컨트롤러 호출
 				new UserController("loginPost");
-
 			}
 		} else if($url === "user/logout") {
 			if($method === "GET") {
@@ -44,6 +43,12 @@ class Router {
 		} else if($url === "board/list") {
 			if($method === "GET") {
 				new BoardController("listGet");
+			}
+		} else if($url === "board/add") {
+			if($method === "GET") {
+				// 처리없음
+			} else {
+				new BoardController("addPost");
 			}
 		}
 

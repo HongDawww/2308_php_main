@@ -5,13 +5,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/view/css/common.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<title><?php echo $this->titleBoardName ?></title>
+	<title><?php echo $this->titleBoardName ?> 페이지</title>
 </head>
 <body>
 	<?php require_once("view/inc/header.php"); ?>
 	
 	<div class="text-center mt-5 mb-5">
-		<h1><?php echo $this->titleBoardName?></h1>
+		<h1><?php echo $this->titleBoardName ?></h1>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="50" height="50" fill="currentColor"
@@ -33,12 +33,11 @@
 		<?php
 			foreach($this->arrBoardInfo as $item) {
 		?>
-			
 			<div class="card">
-				<img src="<?php echo isset($item["b_img"]) ? _PATH_USERIMG.$item["b_img"] : ""; ?>" class="card-img-top" alt="이미지X">
+				<img src="<?php echo isset($item["b_img"]) ? "/"._PATH_USERIMG.$item["b_img"] : ""; ?>" class="card-img-top" alt="이미지 없음">
 				<div class="card-body">
 					<h5 class="card-title"><?php echo $item["b_title"] ?></h5>
-					<p class="card-text"><?php echo mb_substr($item["b_content"], 0 , 7)."..." ?></p>
+					<p class="card-text"><?php echo mb_substr($item["b_content"], 0, 10)."..." ?></p>
 					<button
 						class="btn btn-primary"
 						data-bs-toggle="modal"
@@ -47,11 +46,9 @@
 					</button>
 				</div>
 			</div>
-
-		<?php	
+		<?php
 			}
-		?>
-
+		?>		
 	</main>
 	
 	<!-- 상세 모달 -->
@@ -65,7 +62,7 @@
 				<div class="modal-body">
 					<span>살려주세요.</span>
 					<br><br>
-					<img src="cat.jpg" class="card-img-top" alt="">
+					<img src="./img/cat.jpg" class="card-img-top" alt="">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -79,18 +76,19 @@
 	<div class="modal fade" id="modalInsert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="">
+				<form action="/board/add" method="POST" enctype="multipart/form-data">
+					<input type="hidden" name="b_type" value="<?php echo $this->boardType; ?>">
 					<div class="modal-header">
-						<input type="text" class="form-control" placeholder="제목을 입력하세요.">
+						<input type="text" name="b_title" class="form-control" placeholder="제목을 입력하세요.">
 					</div>
 					<div class="modal-body">
-						<textarea class="form-control" cols="30" rows="10" placeholder="내용을 입력하세요."></textarea>
+						<textarea name="b_content" class="form-control" cols="30" rows="10" placeholder="내용을 입력하세요."></textarea>
 						<br><br>
-						<input type="file" accept="image/*">
+						<input type="file" name="b_img" accept="image/*">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary" data-bs-dismiss="modal">작성</button>
+						<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">작성</button>
 					</div>
 				</form>
 			</div>
