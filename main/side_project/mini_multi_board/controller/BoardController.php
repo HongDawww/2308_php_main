@@ -5,7 +5,8 @@ namespace controller;
 use model\BoardModel;
 
 class BoardController extends ParentsController {
-	protected $arrBoardInfo; 
+	protected $arrBoardInfo;
+	protected $titleBoardName;
 
 	// 게시판 리스트 페이지
 	protected function listGet() {
@@ -15,6 +16,14 @@ class BoardController extends ParentsController {
 		$arrBoardInfo = [
 			"b_type" => $b_type
 		];
+
+		// 페이지 제목 셋팅
+		foreach($this->arrBoardNameInfo as $item) {
+			if($item["b_type"] === $b_type) {
+				$this->titleBoardName = $item["b_name"];
+				break;
+			} 
+		}
 
 		// 모델 인스턴스
 		$boardModel = new BoardModel();

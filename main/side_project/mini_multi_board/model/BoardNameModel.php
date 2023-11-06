@@ -7,10 +7,20 @@ class BoardNameModel extends ParentsModel {
         $sql = 
         " SELECT "
         ."  b_type "
-        ."  b_name "
+        ."  ,b_name "
         ." FROM boardname "
         ." ORDER BY b_type "
         ;
+
+        try {
+            $stmt = $this->conn->query($sql);
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch(Exception $e) {
+            echo "BoardNameModel->getBoardNameList Error : ".$e->getMessage();
+            exit();
+        }
+
     }
 }
 

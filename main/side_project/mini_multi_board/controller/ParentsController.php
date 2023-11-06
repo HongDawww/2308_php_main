@@ -2,9 +2,11 @@
 
 namespace controller;
 
+use model\BoardNameModel;
 class ParentsController {
 	protected $controllerChkUrl; // 헤더 표시 제어용 문자열
 	protected $arrErrorMsg = []; // 화면에 표시할 에러메세지 리스트
+	protected $arrBoardNameInfo; //헤더 게시판 드롭다운 표시용
 
 	// 페이지 권한 (로그인 없이 접속 불가능한 url 리스트)
 	private $arrNeedAuth = [
@@ -22,6 +24,11 @@ class ParentsController {
 
 		// user 로그인 및 권한 체크 
 		$this->chkAuthorization();
+
+		// 헤더 게시판 드롭박스 데이터 획득
+		$boardNameModel = new BoardNameModel();
+		$this->arrBoardNameInfo = $boardNameModel->getBoardNameList();
+		$boardNameModel->destroy();
 
 		// controller 메소드 호출
 		$resultAction = $this->$action();
