@@ -4,6 +4,8 @@
 		- View : 사용자 인터페이스 요소로, 데이타를 기반으로 사용자들이 볼 수 있는 화면
 		- Controller : 모델과 뷰를 연결해주는 다리 역할
 
+![mvc](https://github.com/greenmeerkat/2308_php/assets/142575026/a44021dd-a660-4957-8861-3389766f1a86)
+
 2. Apache - httpd.conf 파일 수정
 	- 주석 해제       
 	LoadModule rewrite_module modules/mod_rewrite.so
@@ -33,11 +35,11 @@
 		- RewriteRule
 			RewriteCond가 true인 요청이면 설정한 요청으로 룰을 변경합니다.
 
-4. DataBase 
-	1. user Table  / 유저 
-		- pk , 아이디 , 비밀번호 , 이름 , 가입일자, 탈퇴일자 , 수정일자
-	2. board Table / 게시판 
-		- pk , user pk(user table id의 fk) , 게시판 타입 , 제목 , 내용 , 이미지파일 , 작성일자 , 수정일자 , 삭제일자
-	3. board name table / 게시판 기본 정보 
-		- pk , 게시판 타입 , 게시판 이름 
-		
+
+4. DataBase
+	1) user(유저) Table
+		- pk, 아이디, 비밀번호, 이름, 가입일자, 수정일자, 탈퇴일자
+	2) board(게시판) Table
+		- pk, 유저pk, 게시판타입, 제목, 내용, 이미지파일, 작성일자, 수정일자, 삭제일자
+	3) boardname(게시판 기본 정보) Table
+		- pk, 게시판타입, 게시판이름

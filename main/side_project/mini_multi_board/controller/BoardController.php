@@ -21,8 +21,11 @@ class BoardController extends ParentsController {
 
 		// board 리스트 획득
 		$this->arrBoardInfo = $boardModel->getBoardList($arrBoardInfo); 
-		$result = $boardModel->getBoardList($arrBoardInfo);
-		$result["b_content"] = mb_substr($result["b_content"], 0, 7)."...";
+	
+		
+		// // 데이터 가공처리 
+		// $this->arrBoardInfo["b_content"] = mb_substr($this->arrBoardInfo["b_content"], 0 , 7)."...";
+		// $this->arrBoardInfo["b_img"] = isset($this->arrBoardInfo["b_img"]) ? _PATH_USERIMG.$this->arrBoardInfo["b_img"] : "";
 
 		// 사용 모델 파기
 		$boardModel->destroy();

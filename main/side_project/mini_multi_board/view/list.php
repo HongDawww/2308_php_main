@@ -35,10 +35,10 @@
 		?>
 			
 			<div class="card">
-				<img src="./img/cat.jpg" class="card-img-top" alt="./img/cat.jpg">
+				<img src="<?php echo isset($item["b_img"]) ? _PATH_USERIMG.$item["b_img"] : ""; ?>" class="card-img-top" alt="이미지X">
 				<div class="card-body">
-					<h5 class="card-title"><?php echo  $item["b_title"] ?></h5>
-					<p class="card-text"><?php echo $item["b_content"] ?></p>
+					<h5 class="card-title"><?php echo $item["b_title"] ?></h5>
+					<p class="card-text"><?php echo mb_substr($item["b_content"], 0 , 7)."..." ?></p>
 					<button
 						class="btn btn-primary"
 						data-bs-toggle="modal"

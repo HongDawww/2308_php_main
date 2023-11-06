@@ -13,8 +13,8 @@
 								게시판
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="./free.html">자유게시판</a></li>
-								<li><a class="dropdown-item" href="./question.html">질문게시판</a></li>
+								<li><a class="dropdown-item" href="/board/list?b_type=0">자유게시판</a></li>
+								<li><a class="dropdown-item" href="/board/list?b_type=1">질문게시판</a></li>
 							</ul>
 						</li>
 					</ul>
