@@ -34,10 +34,19 @@ class ParentsController {
 	// user 권한 체크용 메소드
 	private function chkAuthorization() {
 		$url = $_GET["url"];
+
+		// 접속 권한이 없는 페이지 접속 차단
 		if( !isset($_SESSION["u_id"]) && in_array($url,$this->arrNeedAuth)) {
 			header("Location: /user/login");
 			exit();
 		}
+		
+		// 로그인 상태에서 로그인 페이지 접속시 list로 이동 (board/list)
+		if(isset($_SESSION["u_id"]) && $url === "user/login") {
+			header("Location: /board/list");
+			exit();
+		}
+
 	}
 
 	// view 호출용 메소드

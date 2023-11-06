@@ -30,71 +30,28 @@
 	</div> -->
 
 	<main>
-		<div class="card">
-			<img src="./img/cat.jpg" class="card-img-top" alt="./img/cat.jpg">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<button
-					class="btn btn-primary"
-					data-bs-toggle="modal"
-					data-bs-target="#modalDetail"
-					>상세
-				</button>
+		<?php
+			foreach($this->arrBoardInfo as $item) {
+		?>
+			
+			<div class="card">
+				<img src="./img/cat.jpg" class="card-img-top" alt="./img/cat.jpg">
+				<div class="card-body">
+					<h5 class="card-title"><?php echo  $item["b_title"] ?></h5>
+					<p class="card-text"><?php echo $item["b_content"] ?></p>
+					<button
+						class="btn btn-primary"
+						data-bs-toggle="modal"
+						data-bs-target="#modalDetail"
+						>상세
+					</button>
+				</div>
 			</div>
-		</div>
-		<div class="card">
-			<img src="./img/cat.jpg" class="card-img-top" alt="./img/cat.jpg">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<button
-					class="btn btn-primary"
-					data-bs-toggle="modal"
-					data-bs-target="#modalDetail"
-					>상세
-				</button>
-			</div>
-		</div>
-		<div class="card">
-			<img src="./img/cat.jpg" class="card-img-top" alt="./img/cat.jpg">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<button
-					class="btn btn-primary"
-					data-bs-toggle="modal"
-					data-bs-target="#modalDetail"
-					>상세
-				</button>
-			</div>
-		</div>
-		<div class="card">
-			<img src="./img/cat.jpg" class="card-img-top" alt="./img/cat.jpg">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<button
-					class="btn btn-primary"
-					data-bs-toggle="modal"
-					data-bs-target="#modalDetail"
-					>상세
-				</button>
-			</div>
-		</div>
-		<div class="card">
-			<img src="./img/cat.jpg" class="card-img-top" alt="./img/cat.jpg">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<button
-					class="btn btn-primary"
-					data-bs-toggle="modal"
-					data-bs-target="#modalDetail"
-					>상세
-				</button>
-			</div>
-		</div>
+
+		<?php	
+			}
+		?>
+
 	</main>
 	
 	<!-- 상세 모달 -->
@@ -108,7 +65,7 @@
 				<div class="modal-body">
 					<span>살려주세요.</span>
 					<br><br>
-					<img src="./img/cat.jpg" class="card-img-top" alt="">
+					<img src="cat.jpg" class="card-img-top" alt="">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
