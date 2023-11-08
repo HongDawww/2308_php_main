@@ -13,7 +13,6 @@ class UserController extends ParentsController {
 
 	// 로그인 처리
 	protected function loginPost() {
-		
 		$inputData = [
 			"u_id" => $_POST["u_id"]
 			,"u_pw" => $_POST["u_pw"]
@@ -76,16 +75,13 @@ class UserController extends ParentsController {
 			,"u_name" => $_POST["u_name"]
 		];
 
-		// TODO : 바리데이션 체크
-
 		// 유효성 체크
 		if(!Validation::userChk($inputData)) {
 			$this->arrErrorMsg = Validation::getArrErrorMsg();
 			return "view/regist.php";
 		}
-
+		
 		// TODO : 아이디 중복 체크 필요
-
 
 
 
