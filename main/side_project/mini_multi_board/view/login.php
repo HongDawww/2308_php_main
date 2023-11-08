@@ -12,7 +12,7 @@
 	<main class="d-flex justify-content-center align-items-center h-75">
 		<form style="width: 300px" action="/user/login" method="POST">
 			<div id="errorMsg" class="form-text text-danger">
-				<?php echo count($this->arrErrorMsg) > 0 ? implode("<br>",$this->arrErrorMsg) : "" ?>
+				<?php echo count($this->arrErrorMsg) > 0 ? implode("<br>", $this->arrErrorMsg) : "" ?>
 			</div>
 			<div class="mb-3">
 				<label for="u_id" class="form-label">아이디</label>
@@ -23,6 +23,7 @@
 				<input type="password" class="form-control" id="u_pw" name="u_pw">
 			</div>
 			<button type="submit" class="btn btn-dark">로그인</button>
+			<a href="/user/regist" class="btn btn-secondary float-end">회원가입</a>
 		</form>
 	</main>
 
