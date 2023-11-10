@@ -40,6 +40,10 @@ class Router {
 			} else {
 				new UserController("registPost");
 			}
+		} else if($url === "user/idchk"){
+			if($method === "POST") {
+				new UserController("idChkPost");
+			}
 		} else if($url === "board/list") {
 			if($method === "GET") {
 				new BoardController("listGet");
@@ -53,6 +57,10 @@ class Router {
 		} else if($url === "board/detail") {
 			if($method === "GET") {
 				new BoardController("detailGet");
+			}
+		} else if($url === "board/remove") {
+			if($method === "GET") {
+				new BoardController("removeGet");
 			}
 		}
 
