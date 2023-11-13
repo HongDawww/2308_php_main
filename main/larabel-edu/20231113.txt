@@ -90,6 +90,40 @@ php artisan make:seeder BoardSeeder
 글 번호 제목 내용 작성일 수정일 삭제일자
 no , title , content create_at updated_at delete_at
 ** 기본 pk : id로 설정됨 ( auto_increment , big_int)
+** varchar = string
+** null 허용 : ->nullable();
+** index 생성 : ->index
+1. $table->timestamps(); : create_at updated_at 생성 , null 허용
+2.  $table->timestamp('created_at')->default('CURRENT_TIMESTAMP');  : not null
+ $table->softDeletes(); : delete_at , nullable
+
+migrate 생성 : php artisan migrate
+롤백 : php artisan migrate:rollback
+리셋 : php artisan migrate:reset
+php artisan migrate:refresh
+php artisan migrate:fresh
+
+-- 컬럼 추가 
+php artisan make:migration alter_boards_table
+
+        Schema::table('boards', function (Blueprint $table) {
+            $table->char('categories_no',1);
+        });
+>> php artisan migrate
+------------------------------------------------
+테이블명 : categories 
+
+1. 모델 생성 : php artisan make:model Category -mfs
+
+컬럼 : id, no, name, deleted_at
+
+
+2. 테이블 생성 : 
+$table->id();
+$table->char('no',1)->unique();
+$table->string('name', 20)->unique();
+$table->softDeletes();
+
 
 
 
