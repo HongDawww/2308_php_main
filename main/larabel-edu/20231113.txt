@@ -72,6 +72,28 @@ pwd < 현재 경로
 : footer : {{$key1}}
 
 
+< 초기 구축> 
+1. factories : 대량 더미 데이터 생성 / 테스트
+2. migration : db관리 / DDL
+3. seeders : 기본 데이터 / 버전관리
+4. model : db연결 , orm 
+
+<model table생성> : 터미널에서 입력 
+** 테이블명 복수형으로 자동 인식됨
+php artisan make:model (이름) -mfs
+-mfs : migration factory seeder를 한 번에 생성
+
+-- seeder 생성
+php artisan make:seeder BoardSeeder 
+
+
+글 번호 제목 내용 작성일 수정일 삭제일자
+no , title , content create_at updated_at delete_at
+** 기본 pk : id로 설정됨 ( auto_increment , big_int)
+
+
+
+
 
 
 
