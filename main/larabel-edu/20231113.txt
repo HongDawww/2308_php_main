@@ -1,0 +1,22 @@
+- 명령어로 controller 생성
+php artisan make:controller (이름)
+
+php artisan make:controller ttt
+
+li < 명령어 리스트 
+pwd < 현재 경로
+
+{task} 세그먼트 파라미터
+
+- @yeild : 자식 section 이 없을 경우 두번째 파라미터 사용
+: 상속 - @extends()
+: section 부모 템플릿에 해당하는 yield
+
+- 다른 템플릿 포함 : @include();
+
+- 코드가 많을 경우 : @section ~ @endsection
+
+- 해당 section이 없을 경우 : @section ~ @show 
+
+- 조건문
+

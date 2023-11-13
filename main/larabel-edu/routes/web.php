@@ -129,3 +129,11 @@ Route::resource('/task', TaskController::class);
 //PUT|PATCH       task/{task} ............. task.update › TaskController@update  
 //DELETE          task/{task} ............. task.destroy › TaskController@destroy  
 //GET|HEAD        task/{task}/edit ........ task.edit › TaskController@edit
+
+Route::get('/child1' , function(){
+    return view('child1')->with('gender','1');
+});
+
+Route::get('/child2' , function(){
+    return view('child2');
+}); 
