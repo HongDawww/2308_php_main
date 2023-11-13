@@ -17,16 +17,14 @@
 @for($i = 0; $i < 5; $i++)
     <span>{{$i}}</span>
 @endfor
-
-
 <hr>
 <h3>foreach문</h3>
 @foreach($data as $key => $val)
+    <p>{{$loop->count.' >> '.$loop->iteration}}</p>
     <span>{{$key.' : '.$val}}</span>
     <br>
 @endforeach
 <hr>
-
 <h3>forelse</h3>
 @forelse($data2 as $key => $val)
     <span>{{$key.' : '.$val}}</span>

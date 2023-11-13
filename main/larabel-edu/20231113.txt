@@ -64,6 +64,13 @@ pwd < 현재 경로
     <span>빈 배열입니다</span>
 @endforelse
 
+- 카운트 {{$loop->count}}
+- 현재 인덱스 번호 {{$loop->count.' >> '.$loop->iteration}}
+
+- 템플릿 추가 변수 셋팅
+:  @include('inc.footer',['key1' => 'key1 부모에서 셋팅'])
+: footer : {{$key1}}
+
 
 
 

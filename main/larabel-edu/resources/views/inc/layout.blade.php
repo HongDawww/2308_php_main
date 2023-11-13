@@ -12,5 +12,7 @@
     <h2>부모의 show입니다</h2>
     <p>부모부모부모</p>
     @show
+
+    @include('inc.footer',['key1' => 'key1 부모에서 셋팅'])
 </body>
 </html>
