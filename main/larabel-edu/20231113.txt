@@ -18,5 +18,90 @@ pwd < 현재 경로
 
 - 해당 section이 없을 경우 : @section ~ @show 
 
-- 조건문
+- 조건문 (if) :
+@if($gender === '0')
+    <span>남자</span>
+@elseif($gender === '1')
+    <span>여자</span>
+@else
+    <span>기타</span>
+@endif
+
+- 반복문 (for) : 화면에 변수 출력 {{$i}}
+@for($i = 0; $i < 5; $i++)
+    <span>{{$i}}</span>
+@endfor
+
+9단 
+@for ($j=1; $j < 10; $j++)
+    {{$z = 9}}
+<span> x {{$j}} = {{$j * $z}}</span>
+ @endfor
+
+구구단
+@for($i = 1; $i <= 9; $i++)
+    <span>{{$i.'단'}}</span>
+    <br>
+    @for($j = 1; $j < 10; $j++)
+        <span>{{$i.' x '.$j.' = '.($i * $j)}}</span>
+        <br>
+    @endfor
+@endfor
+
+- foreach 문 :
+<h3>foreach문</h3>
+@foreach($data as $key => $val)
+    <span>{{$key.' : '.$val}}</span>
+    <br>
+@endforeach
+
+- forelse 문 : 빈 배열의  경우
+<h3>forelse</h3>
+@forelse($data2 as $key => $val)
+    <span>{{$key.' : '.$val}}</span>
+    <br>
+@empty
+    <span>빈 배열입니다</span>
+@endforelse
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -131,7 +131,16 @@ Route::resource('/task', TaskController::class);
 //GET|HEAD        task/{task}/edit ........ task.edit › TaskController@edit
 
 Route::get('/child1' , function(){
-    return view('child1')->with('gender','1');
+    $arr = [
+        'name' => '홍길동'
+        ,'age' => 130
+        ,'gender' => '여자'
+    ];
+    $arr2 = [];
+    return view('child1')
+            ->with('gender','3')
+            ->with('data',$arr)
+            ->with('data2',$arr2);
 });
 
 Route::get('/child2' , function(){
