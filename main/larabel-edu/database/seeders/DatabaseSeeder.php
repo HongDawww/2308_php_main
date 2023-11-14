@@ -12,8 +12,13 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+    // \App\Models\User::factory(10)->create();
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $cnt = 0;
+        while ($cnt < 60) {
+            \App\Models\Board::factory(10)->create();
+            $cnt++;
+        }
     }
 }

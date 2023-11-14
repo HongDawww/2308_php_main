@@ -147,18 +147,48 @@ $table->softDeletes();
 3. insert ( 기본 데이터 생성)
 php artisan db:seed --class=CategorySeeder
 
+1. 팩토리 생성 ( 카테고리 번호 ,제목 ,내용, 작성일, 수정일 ,삭제일자 )
+php artisan make:factory ( 팩토리명 ) --model (모델명)
+
+1.------------boardFactory----------------
+public function definition()
+    {
+        $date = $this->faker->dateTimeBetween('-1 years');
+        return [
+           'categories_no' => $this->faker->randomNumber(1)
+           ,'title' => $this->faker->realText(50)
+           ,'content' => $this->faker->realText(1000)
+           ,'created_at' => $date
+           ,'updated_at' => $date
+        ];
+    }
+
+2. -----------------------DatabaseSeeder-----------------
+(더미 데이터 삽입용 팩토리 호출)
+
+   public function run()
+    {
+        $cnt = 0;
+        while ($cnt < 60) {
+            \App\Models\Board::factory(10)->create();
+            $cnt++;
+        }
+    }
+
+3. -------------------- 실행 (db 생성)
+
+php artisan db:seed --class=DatabaseSeeder
 
 
+* 한글 데이터로 변경
+config -> app.php -> 
+ 'faker_locale' => 'ko_KR',
 
+php artisan db:seed --class=DatabaseSeeder
 
-
-
-
-
-
-
-
-
+-----------------------------------------------------------
+현재 시간
+'timezone' => 'Asia/Seoul',
 
 
 
