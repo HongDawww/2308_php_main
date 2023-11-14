@@ -233,7 +233,7 @@ class Board extends Model
 
 }
 2. 쿼리빌더
-
+(1)
 class BoardController extends Controller
 {
    public function index() {
@@ -243,6 +243,74 @@ class BoardController extends Controller
     return var_dump($result);
    }
 }
+(2) $result = DB::select('select * from boards limit :no', ['no' => 1]);
+(3) $result = DB::select('select * from boards limit ?', [2]);
+(4) $result = DB::select('select * from boards limit ? offset ?', [2, 10]);
+
+** select 
+- 카테고리가 4, 7, 8 게시글의 수 출력
+    $arr = [4,7,8];
+    $result = DB::select(
+         'select count(id)
+            from boards 
+            where categories_no = ? 
+            or categories_no = ? 
+            or categories_no = ?'
+        , $arr);
+
+- 카테고리별 게시글 갯수 출력
+ $result = DB::select('select count(categories_no) as cnt from boards group by categories_no');
+
+
+- 카테고리명 도 출력
+    $result = DB::select(
+        'SELECT 
+            ca.no
+            ,ca.name
+            ,COUNT(ca.no) AS cnt
+        FROM boards bo
+               JOIN  categories ca
+                ON bo.categories_no = ca.no
+        GROUP BY ca.no, ca.name'
+        );
+
+
+'select ca.no, ca.name, count(ca.no) as cnt from boards bo join categories ca on bo.categories_no = ca.no group by ca.no, ca.name'
+
+** insert
+    $sql = 
+            'insert into boards(title, content, created_at, updated_at, categories_no) values (?,?,?,?,?)';
+    $arr = [
+                '제목1'
+                ,'내용1'
+                ,now()
+                ,now()
+                ,'0'
+    ];
+    DB::begintransaction();
+    DB::insert($sql, $arr);
+    DB::commit();
+   
+    $result = DB::select('select * from boards order by id desc limit 1');
+
+** update
+    $result = DB::select('select * from boards order by id desc limit 1');
+    DB::begintransaction();
+    DB::update('update boards set title = ?, content = ? where id = ?',['업데이트1','업데이트',$result[0]->id]);
+    DB::commit();
+
+
+** delete
+    DB::beginTransaction();
+    DB::delete('delete from boards where id = ?' ,[$result[0]->id]);
+    DB::commit();
+
+
+
+
+
+
+
 
 
 
