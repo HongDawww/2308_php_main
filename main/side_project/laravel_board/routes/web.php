@@ -18,10 +18,10 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('/user/login',[UserController::class,'loginget'])->name('user.loginget');
-Route::post('/user/login',[UserController::class,'loginpost'])->name('user.loginpost');
-Route::get('/user/registe',[UserController::class,'registeget'])->name('user.registget');
-Route::post('/user/registe',[UserController::class,'registepost'])->name('user.registepost');
+Route::get('/user/login',[UserController::class,'loginget'])->name('user.login.get');
+Route::post('/user/login',[UserController::class,'loginpost'])->name('user.login.post');
+Route::get('/user/registration',[UserController::class,'registrationget'])->name('user.registration.get');
+Route::post('/user/registration',[UserController::class,'registrationpost'])->name('user.registration.post');
 
  
 // GET|HEAD        user/{user}/edit ............................ user.edit › UserController@edit  로그인 처리
