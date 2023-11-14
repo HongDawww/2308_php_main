@@ -59,6 +59,51 @@ class BoardController extends Controller
     // DB::delete('delete from boards where id = ?' ,[$result[0]->id]);
     // DB::commit();
 
+    $result = 
+        DB::table('boards')
+        ->where('id','=',300)
+        ->get();
+
+    $result = 
+        DB::table('boards')
+        ->where('id','=',300)
+        ->orWhere('id','=',400)
+        ->get();
+    
+        $result = 
+        DB::table('boards')
+        ->where('id','=',300)
+        ->orWhere('id','=',400)
+        ->orderBy('id','desc')
+        ->get();
+
+        $result = 
+        DB::table('categories')
+        ->whereIn('no',[1,2,3])
+        ->get();
+
+        $result = 
+        DB::table('categories')
+        ->whereNotIn('no',[1,2,3])
+        ->get();
+        
+        $result = DB::table('boards')->orderBy('id','desc')->first();
+        $result = DB::table('boards')->count();
+        $result = DB::table('categories')->max('no');
+       
+        $result = 
+            DB::table('boards')
+            ->select('boards.title','boards.content','categories.name')
+            ->join('categories','categories.no','boards.categories_no')
+            ->limit(100)
+            ->get();
+
+        $result = 
+            DB::table('boards')
+            ->select('categories.no','categories.name', DB::raw('count(categories.no) as cnt'))
+            ->join('categories','categories.no','boards.categories_no')
+            ->groupBy('categories.no','categories.name')
+            ->get();
 
     return var_dump($result);
    }

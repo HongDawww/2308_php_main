@@ -305,6 +305,64 @@ class BoardController extends Controller
     DB::delete('delete from boards where id = ?' ,[$result[0]->id]);
     DB::commit();
 
+쿼리 빌더 체이닝
+
+(1)
+$result = DB::table('boards')->where('id','=',300)->get();
+
+(2)
+    $result = 
+        DB::table('boards')
+        ->where('id','=',300)
+        ->orWhere('id','=',400)
+        ->get();
+ (3)     
+        $result = 
+        DB::table('boards')
+        ->where('id','=',300)
+        ->orWhere('id','=',400)
+        ->orderBy('id','desc')
+        ->get();
+(4)
+        $result = 
+        DB::table('categories')
+        ->whereIn('no',[1,2,3])
+        ->get();
+
+(5)
+        $result = 
+        DB::table('categories')
+        ->whereNotIn('no',[1,2,3])
+        ->get();
+** first()
+- 최상위 limit 1
+$result = DB::table('boards')->first();
+
+- desc
+$result = DB::table('boards')->orderBy('id','desc')->first();
+
+** count() : 레코드 수 반환
+$result = DB::table('boards')->count();
+
+**max()
+$result = DB::table('boards')->max('id');
+
+
+- 타이틀, 내용,  카테고리명 100개
+        $result =  DB::table('boards')
+                    ->select('boards.title','boards.content','categories.name')
+                    ->join('categories','categories.no','boards.categories_no')
+                    ->limit(100)
+                    ->get();
+
+- 카테고리별 게시글 갯수, 카테고리명 출력 
+        $result = 
+            DB::table('boards')
+            ->select('categories.no','categories.name', DB::raw('count(categories.no)'))
+            ->join('categories','categories.no','boards.categories_no')
+            ->groupBy('categories.no','categories.name')
+            ->get();
+
 
 
 
