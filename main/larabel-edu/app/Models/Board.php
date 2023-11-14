@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Board extends Model
 {
     use HasFactory;
+    protected $table = 'boards';
+    protected $primaryKey = 'id';
+
+    public $timestamps = true;
+
 }

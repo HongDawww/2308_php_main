@@ -190,6 +190,72 @@ php artisan db:seed --class=DatabaseSeeder
 현재 시간
 'timezone' => 'Asia/Seoul',
 
+php artisan make:model (모델명)-mfs
+
+ORM
+$data = ['id' => 1]; --insert
+
+Models
+1. 테이블 정의
+protected $table = '테이블명';
+2. pk 정의 (기본값 : id)
+ protected $primaryKey = 'id';
+** 대량 할당 취약성 대책
+ - 화이트 리스트 방식 : 수정 O protected $fillable = ['컬럼1', '컬럼2'];
+ - 블랙 리스트 방식 : 수정 X protected $guarded = ['컬럼1', '컬럼2'];
+
+** default 값 셋팅
+ public $timestamps = true;
+
+????    
+ protected $attributes = [
+        'created_at' => \now
+        ,'updated_at' => \now
+    ];
+??????????????????
+
+board controller 생성
+ - php artisan make:controller BoardController
+
+ - use Illuminate\Support\Facades\DB;
+0. 라우터 생성
+use App\Http\Controller\BoardController;
+Route::get('/boards', [BoardController::class, 'index']) ->name('board.index');
+1. 메소드 생성
+
+class Board extends Model
+{
+    use HasFactory;
+    protected $table = 'boards';
+    protected $primaryKey = 'id';
+
+    public $timestamps = true;
+
+}
+2. 쿼리빌더
+
+class BoardController extends Controller
+{
+   public function index() {
+
+    $result = DB::select('select * from boards limit 10');
+
+    return var_dump($result);
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -146,3 +146,6 @@ Route::get('/child1' , function(){
 Route::get('/child2' , function(){
     return view('child2');
 }); 
+
+use App\Http\Controllers\BoardController;
+Route::get('/boards', [BoardController::class, 'index']) ->name('board.index');
