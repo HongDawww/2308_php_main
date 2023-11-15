@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
@@ -13,7 +14,10 @@ class BoardController extends Controller
      */
     public function index()
     {
-       return view('list');
+        if(!Auth::check()){
+            return redirect()->route('user.login.get');
+        }    
+        return view('list');
     }
 
     /**

@@ -533,8 +533,7 @@ $data = $request->only() : 필요한 프로퍼티 값 배열 형태로 가져옴
 @auth ~ @endauth : 로그아웃 상태에서 화면 출력 X
 @guest ~ @endguest : 로그아웃 상태 화면에 출력
 
-
-
+- 로그인 체크
 
 
 
