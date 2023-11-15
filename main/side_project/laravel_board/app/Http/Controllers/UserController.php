@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class UserController extends Controller
@@ -72,4 +73,11 @@ class UserController extends Controller
 
         return redirect()->route('user.login.get');
     }
+    
+    public function logoutget(){
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('user.login.get');
+    }
+
 }

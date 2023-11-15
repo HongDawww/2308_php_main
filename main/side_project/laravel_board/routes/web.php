@@ -23,6 +23,7 @@ Route::get('/user/login',[UserController::class,'loginget'])->name('user.login.g
 Route::post('/user/login',[UserController::class,'loginpost'])->name('user.login.post');
 Route::get('/user/registration',[UserController::class,'registrationget'])->name('user.registration.get');
 Route::post('/user/registration',[UserController::class,'registrationpost'])->name('user.registration.post');
+Route::get('/user/logout',[UserController::class,'logoutget'])->name('user.logout.get');
 // GET|HEAD        user/login ....................user.login.get › UserController@loginget  
 // POST            user/login ....................user.login.post › UserController@loginpost  
 // GET|HEAD        user/registration .............user.registration.get › UserController@registrationget  

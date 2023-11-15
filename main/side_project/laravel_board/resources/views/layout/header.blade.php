@@ -2,6 +2,7 @@
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">라라벨 보드</a>
+				@auth
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 				</button>
@@ -17,8 +18,12 @@
 							</ul>
 						</li>
 					</ul>
-					<a href="./login.html" class="navbar-nav nav-link text-light" role="button">로그아웃</a>
+					<a href="{{route('user.logout.get')}}" class="navbar-nav nav-link text-light" role="button">로그아웃</a>
 				</div>
+				@endauth
+				@guest
+					<a href="{{route('user.registration.get')}}" class="navbar-nav nav-link text-light" role="button">회원가입</a>
+				@endguest
 			</div>
 		</nav>
 </header>

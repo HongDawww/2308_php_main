@@ -519,8 +519,19 @@ $data = $request->only() : 필요한 프로퍼티 값 배열 형태로 가져옴
 
 
 - 로그인 유저는 리스트로 이동 : 리다이렉트
-
-
+- 로그아웃 route
+> Route::get('/user/logout',[UserController::class,'logoutger'])->name('user.logout.get');
+- 로그아웃 controller
+>  use Illuminate\Support\Facades\Session;
+* Session::flush(); 세션 파기
+* Auth::logout(); 로그아웃
+>     public function logoutget(){
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('user.login.get');
+    }
+@auth ~ @endauth : 로그아웃 상태에서 화면 출력 X
+@guest ~ @endguest : 로그아웃 상태 화면에 출력
 
 
 
