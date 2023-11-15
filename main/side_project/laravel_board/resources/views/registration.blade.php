@@ -4,14 +4,7 @@
 <main class="d-flex justify-content-center align-items-center h-75">
 		<form style="width: 300px" action="{{route('user.registration.post')}}" method="post">
 			@csrf
-			<div id="errorMsg" class="form-text text-danger">
-				@forelse ($errors->all() as $val)
-					{{$val}}
-					<br>
-				@empty	
-				@endforelse
-
-			</div>
+			@include('layout.errorlayout')
             <div class="mb-3">
 				<label for="name" class="form-label">이름</label>
 				<input type="text" class="form-control" id="name" name="name">

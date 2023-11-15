@@ -4,16 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\user;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function loginget(){
+        if(Auth::check()){
+            return redirect()->route('board.index');
+        }
         return view('login');
     }
-    public function loginpost(){
-        return '로그인 포스트';
+    public function loginpost(Request $request){
+
+        $validator = Validator::make(
+            $request->only('email','password')
+            ,[
+                'email'     => 'required|email|max:50'
+                ,'password' => 'required'
+            ]
+        );
+
+        if($validator->fails()){
+            return view('login')->withErrors($validator->errors());
+        }
+
+        $result = User::where('email',$request->email)->first();
+        if(!$result || !(Hash::check($request->password,$result->password))) {
+            $errorMsg = '아이디와 비밀번호를 다시 확인해주세요';
+            return redirect()->route('user.login.get')->withErrors($errorMsg);
+        }
+
+        Auth::login($result);
+        if(Auth::check()){
+            session($result->only('id'));
+        } else {
+            $errorMsg = "인증 에러가 발생했습니다.";
+            return view('login')->withErrors($errorMsg);
+        }
+
+        return redirect()->route('board.index');
     }
     public function registrationget(){
         return view('registration');
@@ -28,6 +59,7 @@ class UserController extends Controller
                 ,'password' => 'required|same:passwordchk'
             ]
         );
+
         if($validator->fails()){
             return view('registration')->withErrors($validator->errors());
         }
