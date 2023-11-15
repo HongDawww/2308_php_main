@@ -446,6 +446,60 @@ resources/ layout / header.blade.php
 - registration.blade.php
 
 
+- css link layout.blade.php
+
+
+@csrf : token
+$data = $request->only() : 필요한 프로퍼티 값 배열 형태로 가져옴
+
+ - 비밀번호 암호화 
+> use Illuminate\Support\Facades\Hash;
+>  $data['password'] = Hash::make($data['password']);
+- 회원가입 
+> use App\Models\use;
+> $result = User::create($data);
+
+** find : select
+
+- 유효성 검사
+> use Illuminate\Support\Facades\Varidator;
+>  $varidator = Varidator::make(
+            $request->only('name','email','password','passwordchk')
+            ,[
+                'email'     => 'required|email|max:50'
+                ,'name'     => 'required|regex:/^[a-zA-Z가-힣]+$/|min:2|max:50'
+                ,'password' => 'required|same:passwordchk'
+            ]
+        );
+        if($varidator->fails()){
+            return view('registration')->with('error',$varidator->errors());
+        }
+
+
+- 로그인 페이지로 이동
+> return redirect()->route('user.login.get');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
