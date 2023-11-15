@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Board;
 
 class BoardController extends Controller
 {
@@ -16,8 +17,11 @@ class BoardController extends Controller
     {
         if(!Auth::check()){
             return redirect()->route('user.login.get');
-        }    
-        return view('list');
+        }
+
+        $result = Board::get();
+
+        return view('list')->with('data', $result);
     }
 
     /**
@@ -49,7 +53,10 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = Board::find($id);
+        return view('', [
+            'user' => User::findOrFail($id)
+        ]);
     }
 
     /**
